@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for Docker layer caching
-COPY requirements.txt .
+COPY Requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -50,7 +50,7 @@ COPY --from=build /usr/local/lib/python3.10/site-packages /usr/local/lib/python3
 COPY --from=build /usr/local/bin /usr/local/bin
 
 # Copy application code (relies on .dockerignore)
-COPY inference_api.py .
+COPY main.py .
 COPY *.pkl ./
 
 # Change ownership to non-root user
